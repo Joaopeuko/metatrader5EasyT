@@ -11,7 +11,7 @@ setuptools.setup(
     version='0.1.0',
     license='MIT',
     author="Joao Paulo Euko",
-    url='',
+    url='https://github.com/Joaopeuko/metatrader5EasyT',
     keywords=["metatrader5", "algotrading", "stock market"],
     long_description=long_description,
     long_description_content_type='text/markdown',

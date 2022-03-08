@@ -42,6 +42,6 @@ That is Ok, and, there are many ways you can help me, here is a list:
 All the Libraries Documentation are linked below:
 
 - [easyT]()
-  - [metatrader5EasyT]()
+  - [metatrader5EasyT](https://joaopeuko.github.io/metatrader5EasyT/)
 
-For this specific project, is this one [metatrader5EasyT]().
+For this specific project, is this one [metatrader5EasyT](https://joaopeuko.github.io/metatrader5EasyT/).
