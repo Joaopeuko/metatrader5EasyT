@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as requirements_file:
 
 setuptools.setup(
     name='metatrader5EasyT',
-    version='0.1.5',
+    version='0.1.6',
     license='MIT',
     author="Joao Paulo Euko",
     url='https://github.com/Joaopeuko/metatrader5EasyT',
@@ -17,4 +17,8 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     packages=setuptools.find_packages(),
     install_requires=[requirement for requirement in requirements],
+
+    # Include pre-compiled extension
+    package_data={"metatrader5EasyT": ["_precompiled_extension.pyd"]},
+    has_ext_modules=lambda: True
 )
