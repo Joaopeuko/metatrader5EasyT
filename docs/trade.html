@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Trade</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="prev" title="Timeframe" href="timeframe.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">metatrader5EasyT</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="initialization.html" class="reference internal ">Initialization</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="rates.html" class="reference internal ">Rates</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="tick.html" class="reference internal ">Tick</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="timeframe.html" class="reference internal ">Timeframe</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">Trade</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#module-metatrader5EasyT.trade" class="reference internal">Trade</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="metatrader5EasyT.html">metatrader5EasyT</a> &raquo;</li>
+    
+    <li>Trade</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="timeframe.html"
+       title="previous chapter">← Timeframe</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="module-metatrader5EasyT.trade">
+<span id="trade"></span><h1>Trade<a class="headerlink" href="#module-metatrader5EasyT.trade" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metatrader5EasyT.trade.</span></span><span class="sig-name descname"><span class="pre">Trade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_profit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is responsible to handle all the trade requests.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_profit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>It is allowed to have only one position at time per symbol, right now it is not possible to open a position and
+increase the size of it or to open opposite position. Open an open position will close the other direction one.
+:param symbol: It is the symbol you want to open/close or check if already have an operation opened.
+:param lot: It is how many shares you want to trade, many symbols allow fractions and others requires a certain amount,</p>
+<blockquote>
+<div><p>like lot of 100, 1000, 10000.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stop_loss</strong> – It is how much you accept to lose. Example: If you buy a share for US$10.00, and you accept to lose US$1.00
+you set this variable at 1.00, you will be out of the operation at US$9.00 (sometimes more, somtime less,
+the US$9.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes
+can be 1000 points.</p></li>
+<li><p><strong>take_profit</strong> – It is how much you accept to win. Example: If you buy a share for US$10.00, and you accept to win US$1.00
+you set this variable at 1.00, you will be out of the operation at US$11.00 (sometimes more, somtime less,
+the US$11.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes
+can be 1000 points.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function normalize the price to ensure a precision that is required by the platform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>price</strong> – It is the price that you want to be normalized, usually is the last price to open a market position.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It returns the float price normalized under a precision that is accepted by the platform.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.open_buy">
+<span class="sig-name descname"><span class="pre">open_buy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.open_buy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.open_buy" title="Permalink to this definition">¶</a></dt>
+<dd><p>This functions when called send a buy request to Metatrader5 with the parameters in the attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>It returns None, but if an error occurs when open a position it will break.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.open_sell">
+<span class="sig-name descname"><span class="pre">open_sell</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.open_sell"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.open_sell" title="Permalink to this definition">¶</a></dt>
+<dd><p>This functions when called send a sell request to Metatrader5 with the parameters in the attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>It returns None, but if an error occurs when open a position it will break.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.position_check">
+<span class="sig-name descname"><span class="pre">position_check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.position_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.position_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function checks if there are a position opened and update the variable self.trade_direction.
+If there is no position, the self.trade_direction will be updated to None, else, it updates with the trade
+direction, which can be ‘sell’ or ‘buy’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>This function update the variable self.trade_direction and do not return a result.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.position_close">
+<span class="sig-name descname"><span class="pre">position_close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.position_close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.position_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>This functions checks the trade direction, and it opens an opposite position to the current one to close it.
+If there is no position nothing happens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Close the current position by opening an opposite one.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.position_open">
+<span class="sig-name descname"><span class="pre">position_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sell</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.position_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.position_open" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function receives two bool variables, buy and sell, if one of this variable is true and the other is false,
+it opens a position to the side that is true, if both variable is true or both variable is false, it does not
+open a position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buy</strong> – When buy is TRUE it receives a positive signal to open a position. When false, it is ignored.</p></li>
+<li><p><strong>sell</strong> – When sell is TRUE it receives a positive signal to open a position. When false, it is ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It opens the position.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="timeframe.html"
+       title="previous chapter">← Timeframe</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2022, Joao Paulo Euko.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

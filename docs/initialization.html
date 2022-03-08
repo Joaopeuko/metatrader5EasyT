@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Initialization</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Rates" href="rates.html" />
+  <link rel="prev" title="metatrader5EasyT" href="metatrader5EasyT.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">metatrader5EasyT</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">Initialization</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#initialization" class="reference internal">Initialization</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="rates.html" class="reference internal ">Rates</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="tick.html" class="reference internal ">Tick</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="timeframe.html" class="reference internal ">Timeframe</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="trade.html" class="reference internal ">Trade</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="metatrader5EasyT.html">metatrader5EasyT</a> &raquo;</li>
+    
+    <li>Initialization</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="metatrader5EasyT.html"
+       title="previous chapter">← metatrader5EasyT</a>
+  </li>
+  <li class="next">
+    <a href="rates.html"
+       title="next chapter">Rates →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <section id="initialization">
+<h1>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-metatrader5EasyT.initialization"></span><dl class="py class">
+<dt class="sig sig-object py" id="metatrader5EasyT.initialization.Initialize">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metatrader5EasyT.initialization.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#Initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.Initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class ensure that the platform are working properly.
+If it is connected on the internet, and if the symbol that you are trying to use exists or was not mistyped.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.initialization.Initialize.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#Initialize.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.Initialize.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the constructor and set the _log.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.initialization.Initialize.initialize_platform">
+<span class="sig-name descname"><span class="pre">initialize_platform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#Initialize.initialize_platform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.Initialize.initialize_platform" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is responsible to initialize the platform that will be used to trade.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#metatrader5EasyT.initialization.PlatformNotInitialized" title="metatrader5EasyT.initialization.PlatformNotInitialized"><strong>PlatformNotInitialized</strong></a> – Raise this error when the Metatrader5 is not installed or not possible to load</p></li>
+<li><p><strong>it for some reason.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It returns true if initialized else return false.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.initialization.Initialize.initialize_symbol">
+<span class="sig-name descname"><span class="pre">initialize_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#Initialize.initialize_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.Initialize.initialize_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is responsible to initialize as many symbols as you want.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>symbols</strong> – It receives strings as parameters containing the symbol names to be initialized.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#metatrader5EasyT.initialization.SymbolNotFound" title="metatrader5EasyT.initialization.SymbolNotFound"><strong>SymbolNotFound</strong></a> – If not possible to initialize the symbol raises this error.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>When the symbol is successfully initialized it returns True and, it updates the list
+self.symbol_initialized if you want to work with the symbols correctly initialized.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="metatrader5EasyT.initialization.PlatformNotInitialized">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metatrader5EasyT.initialization.</span></span><span class="sig-name descname"><span class="pre">PlatformNotInitialized</span></span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#PlatformNotInitialized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.PlatformNotInitialized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise this error when the Metatrader5 is not installed or not possible to load it for some reason.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="metatrader5EasyT.initialization.SymbolNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metatrader5EasyT.initialization.</span></span><span class="sig-name descname"><span class="pre">SymbolNotFound</span></span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#SymbolNotFound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.SymbolNotFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise this error when the symbol is not found.</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="metatrader5EasyT.html"
+       title="previous chapter">← metatrader5EasyT</a>
+  </li>
+  <li class="next">
+    <a href="rates.html"
+       title="next chapter">Rates →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2022, Joao Paulo Euko.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

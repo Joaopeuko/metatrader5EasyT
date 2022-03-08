@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>metatrader5EasyT.trade &#8212; metatrader5EasyT 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for metatrader5EasyT.trade</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">MetaTrader5</span> <span class="k">as</span> <span class="nn">Mt5</span>
+<span class="kn">from</span> <span class="nn">abstractEasyT</span> <span class="kn">import</span> <span class="n">trade</span>
+<span class="kn">from</span> <span class="nn">supportLibEasyT</span> <span class="kn">import</span> <span class="n">log_manager</span>
+
+
+<div class="viewcode-block" id="Trade"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade">[docs]</a><span class="k">class</span> <span class="nc">Trade</span><span class="p">(</span><span class="n">trade</span><span class="o">.</span><span class="n">Trade</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is responsible to handle all the trade requests.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Trade.__init__"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">lot</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                 <span class="n">stop_loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                 <span class="n">take_profit</span><span class="p">:</span> <span class="nb">float</span>
+                 <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        It is allowed to have only one position at time per symbol, right now it is not possible to open a position and</span>
+<span class="sd">        increase the size of it or to open opposite position. Open an open position will close the other direction one.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol:</span>
+<span class="sd">                It is the symbol you want to open/close or check if already have an operation opened.</span>
+
+<span class="sd">            lot:</span>
+<span class="sd">                It is how many shares you want to trade, many symbols allow fractions and others requires a certain amount,</span>
+<span class="sd">                like lot of 100, 1000, 10000.</span>
+
+<span class="sd">            stop_loss:</span>
+<span class="sd">                It is how much you accept to lose. Example: If you buy a share for US$10.00, and you accept to lose US$1.00</span>
+<span class="sd">                you set this variable at 1.00, you will be out of the operation at US$9.00 (sometimes more, somtime less,</span>
+<span class="sd">                the US$9.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes</span>
+<span class="sd">                can be 1000 points.</span>
+
+<span class="sd">            take_profit:</span>
+<span class="sd">                It is how much you accept to win. Example: If you buy a share for US$10.00, and you accept to win US$1.00</span>
+<span class="sd">                you set this variable at 1.00, you will be out of the operation at US$11.00 (sometimes more, somtime less,</span>
+<span class="sd">                the US$11.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes</span>
+<span class="sd">                can be 1000 points.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">log_manager</span><span class="o">.</span><span class="n">LogManager</span><span class="p">(</span><span class="s1">&#39;metatrader5&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Logger Initialized in Trade&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lot</span> <span class="o">=</span> <span class="n">lot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_loss</span> <span class="o">=</span> <span class="n">stop_loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">take_profit</span> <span class="o">=</span> <span class="n">take_profit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticket</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">symbol_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">trade_tick_size</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trade_allowed</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># &#39;buy&#39;, &#39;sell&#39;, or None for no position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Trade.normalize"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.normalize">[docs]</a>    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function normalize the price to ensure a precision that is required by the platform</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            price:</span>
+<span class="sd">                It is the price that you want to be normalized, usually is the last price to open a market position.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            It returns the float price normalized under a precision that is accepted by the platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Normalizing the price&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">price</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span></div>
+
+<div class="viewcode-block" id="Trade.open_buy"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.open_buy">[docs]</a>    <span class="k">def</span> <span class="nf">open_buy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This functions when called send a buy request to Metatrader5 with the parameters in the attributes.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            It returns None, but if an error occurs when open a position it will break.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">symbol_info_tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">ask</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticket</span> <span class="o">=</span> <span class="p">(</span><span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ticket</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span>
+            <span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;BUY Order sent: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s1">,&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lot</span><span class="si">}</span><span class="s1"> lot(s),&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; at </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s1">,&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; stoploss:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_loss</span><span class="p">)</span><span class="si">}</span><span class="s1">,&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; takeprofit: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">take_profit</span><span class="p">)</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">TRADE_ACTION_DEAL</span><span class="p">,</span>
+            <span class="s2">&quot;symbol&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span>
+            <span class="s2">&quot;volume&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lot</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">ORDER_TYPE_BUY</span><span class="p">,</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span>
+            <span class="s2">&quot;sl&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_loss</span><span class="p">),</span>
+            <span class="s2">&quot;tp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">take_profit</span><span class="p">),</span>
+            <span class="s2">&quot;deviation&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;magic&quot;</span><span class="p">:</span> <span class="mi">7777</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;easyT!&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type_time&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">ORDER_TIME_GTC</span><span class="p">,</span>
+            <span class="s2">&quot;type_filling&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">ORDER_FILLING_RETURN</span><span class="p">,</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ticket</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">order_send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">result</span><span class="o">.</span><span class="n">retcode</span> <span class="o">!=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">TRADE_RETCODE_DONE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Something went wrong: Position Not Found for symbol </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s1">!&#39;</span>
+                                   <span class="sa">f</span><span class="s1">&#39; Last Error: </span><span class="si">{</span><span class="n">Mt5</span><span class="o">.</span><span class="n">last_error</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Change trade direction to BUY.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="s1">&#39;buy&#39;</span></div>
+
+<div class="viewcode-block" id="Trade.open_sell"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.open_sell">[docs]</a>    <span class="k">def</span> <span class="nf">open_sell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This functions when called send a sell request to Metatrader5 with the parameters in the attributes.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            It returns None, but if an error occurs when open a position it will break.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">symbol_info_tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">bid</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticket</span> <span class="o">=</span> <span class="p">(</span><span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ticket</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span>
+            <span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SELL Order sent: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s1">,&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lot</span><span class="si">}</span><span class="s1"> lot(s),&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; at </span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s1">,&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; stoploss:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_loss</span><span class="p">)</span><span class="si">}</span><span class="s1">,&#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39; takeprofit: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">take_profit</span><span class="p">)</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">TRADE_ACTION_DEAL</span><span class="p">,</span>
+            <span class="s2">&quot;symbol&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span>
+            <span class="s2">&quot;volume&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">lot</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">ORDER_TYPE_SELL</span><span class="p">,</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span>
+            <span class="s2">&quot;sl&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_loss</span><span class="p">),</span>
+            <span class="s2">&quot;tp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">price</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">take_profit</span><span class="p">),</span>
+            <span class="s2">&quot;deviation&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">&quot;magic&quot;</span><span class="p">:</span> <span class="mi">7777</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;easyT&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type_time&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">ORDER_TIME_GTC</span><span class="p">,</span>
+            <span class="s2">&quot;type_filling&quot;</span><span class="p">:</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">ORDER_FILLING_RETURN</span><span class="p">,</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ticket</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">order_send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">result</span><span class="o">.</span><span class="n">retcode</span> <span class="o">!=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">TRADE_RETCODE_DONE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Something went wrong: Position Not Found for symbol </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s1">!&#39;</span>
+                                   <span class="sa">f</span><span class="s1">&#39; Last Error: </span><span class="si">{</span><span class="n">Mt5</span><span class="o">.</span><span class="n">last_error</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Change trade direction to SELL.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="s1">&#39;sell&#39;</span></div>
+
+<div class="viewcode-block" id="Trade.position_open"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.position_open">[docs]</a>    <span class="k">def</span> <span class="nf">position_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buy</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">sell</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function receives two bool variables, buy and sell, if one of this variable is true and the other is false,</span>
+<span class="sd">        it opens a position to the side that is true, if both variable is true or both variable is false, it does not</span>
+<span class="sd">        open a position.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            buy:</span>
+<span class="sd">                When buy is TRUE it receives a positive signal to open a position. When false, it is ignored.</span>
+
+<span class="sd">            sell:</span>
+<span class="sd">                When sell is TRUE it receives a positive signal to open a position. When false, it is ignored.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            It opens the position.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt;  position_open(True, False)</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Open position called. Buy is </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">buy</span><span class="p">)</span><span class="si">}</span><span class="s1">, and sell is </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sell</span><span class="p">)</span><span class="si">}</span><span class="s1">. Trade allowed is &#39;</span>
+                              <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_trade_allowed</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trade_allowed</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">buy</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sell</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;BUY is true, SELL is false&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">open_buy</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">sell</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">buy</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;BUY is false, SELL is true&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">open_sell</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span></div>
+
+<div class="viewcode-block" id="Trade.position_close"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.position_close">[docs]</a>    <span class="k">def</span> <span class="nf">position_close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This functions checks the trade direction, and it opens an opposite position to the current one to close it.</span>
+<span class="sd">        If there is no position nothing happens.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Close the current position by opening an opposite one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Close position called.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">==</span> <span class="s1">&#39;buy&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Close BUY position.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open_sell</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">==</span> <span class="s1">&#39;sell&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Close SELL position&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open_buy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Trade.position_check"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.position_check">[docs]</a>    <span class="k">def</span> <span class="nf">position_check</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function checks if there are a position opened and update the variable self.trade_direction.</span>
+<span class="sd">        If there is no position, the self.trade_direction will be updated to None, else, it updates with the trade</span>
+<span class="sd">        direction, which can be &#39;sell&#39; or &#39;buy&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            This function update the variable self.trade_direction and do not return a result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Calls Metatrader5 to check if there is a position opened.&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;There is a position opened.&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># if buy</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Set the trade direction to BUY&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="s1">&#39;buy&#39;</span>
+
+            <span class="k">elif</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># if sell</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Set the trade direction to SELL&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="s1">&#39;sell&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;There are no position opened.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Set the trade direction to None&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="kc">None</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">metatrader5EasyT</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metatrader5EasyT.html">metatrader5EasyT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">docs</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Joao Paulo Euko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

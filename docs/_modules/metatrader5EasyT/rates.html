@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>metatrader5EasyT.rates &#8212; metatrader5EasyT 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for metatrader5EasyT.rates</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">MetaTrader5</span> <span class="k">as</span> <span class="nn">Mt5</span>
+<span class="kn">from</span> <span class="nn">abstractEasyT</span> <span class="kn">import</span> <span class="n">rates</span>
+<span class="kn">from</span> <span class="nn">supportLibEasyT</span> <span class="kn">import</span> <span class="n">log_manager</span>
+
+<span class="kn">from</span> <span class="nn">metatrader5EasyT.timeframe</span> <span class="kn">import</span> <span class="n">TimeFrame</span>
+
+
+<div class="viewcode-block" id="Rates"><a class="viewcode-back" href="../../rates.html#metatrader5EasyT.rates.Rates">[docs]</a><span class="k">class</span> <span class="nc">Rates</span><span class="p">(</span><span class="n">rates</span><span class="o">.</span><span class="n">Rates</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is responsible to retrieve a certain amount of previous data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Rates.__init__"><a class="viewcode-back" href="../../rates.html#metatrader5EasyT.rates.Rates.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">timeframe</span><span class="p">:</span> <span class="n">TimeFrame</span><span class="p">,</span>
+                 <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol:</span>
+<span class="sd">                The symbol you want to retrieve previous data.</span>
+
+<span class="sd">            timeframe:</span>
+<span class="sd">                The timeframe you want information, like 1 minute, 5 minute, 1 week. You can find all the timeframe</span>
+<span class="sd">                available in the TimeFrame Class (metatrader5EasyT.timeframe).</span>
+
+<span class="sd">            count:</span>
+<span class="sd">                It is the amount of information in the past you want. If your time frame is 5 minutes and your count is 4,</span>
+<span class="sd">                it will return 4 values containing time, open, high, low, close, tick_volume information of this past 4</span>
+<span class="sd">                candlesticks.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">log_manager</span><span class="o">.</span><span class="n">LogManager</span><span class="p">(</span><span class="s1">&#39;metatrader5&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Logger Initialized in Rates&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timeframe</span> <span class="o">=</span> <span class="n">timeframe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="n">count</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tick_volume</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Rates.update_rates"><a class="viewcode-back" href="../../rates.html#metatrader5EasyT.rates.Rates.update_rates">[docs]</a>    <span class="k">def</span> <span class="nf">update_rates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Everytime this function is called it update the last values, it is important to have update information to</span>
+<span class="sd">        calculate indicators and ensure your trading strategy is working properly.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            It updates the attributes in the constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Rates updated&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">copy_rates_from_pos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timeframe</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;open&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">high</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">low</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tick_volume</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;tick_volume&#39;</span><span class="p">]</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">metatrader5EasyT</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metatrader5EasyT.html">metatrader5EasyT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">docs</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Joao Paulo Euko.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

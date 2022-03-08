@@ -1,0 +1,7 @@
+pytest~=7.0.1
+coverage~=6.3.2
+pytest-cov~=3.0.0
+MetaTrader5~=5.0.36
+supportLibEasyT~=0.1.0
+numpy~=1.22.2
+abstractEasyT~=0.2.2
