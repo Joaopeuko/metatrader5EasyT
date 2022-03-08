@@ -53,5 +53,6 @@ jobs:
           TWINE_USERNAME: ${{ secrets.PYPI_API_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          python setup.py sdist bdist_wheel
+          python3 setup.py bdist_wheel --plat-name win32
+          python3 setup.py bdist_wheel --plat-name win_amd64
           twine upload dist/*
