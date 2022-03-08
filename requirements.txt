@@ -1,6 +1,7 @@
 pytest>=7.0.1
 MetaTrader5>=5.0.36
 numpy>=1.22.3
+pytest-cov>=3.0.0
 coverage>=6.3.2
 abstractEasyT>=0.2.2
 supportLibEasyT>=0.1.0
