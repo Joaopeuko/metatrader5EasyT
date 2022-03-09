@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip  -m install --upgrade setuptools
+          python3 -m pip install --upgrade setuptools
           python3 setup.py sdist bdist_wheel 
           twine upload --skip-existing --repository-url https://test.pypi.org/legacy/ dist/*
           
