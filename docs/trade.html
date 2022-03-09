@@ -163,18 +163,13 @@
 <dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_loss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_profit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>It is allowed to have only one position at time per symbol, right now it is not possible to open a position and
-increase the size of it or to open opposite position. Open an open position will close the other direction one.
-:param symbol: It is the symbol you want to open/close or check if already have an operation opened.
-:param lot:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>It is how many shares you want to trade, many symbols allow fractions and others requires a</dt><dd><p>certain amount, like lot of 100, 1000, 10000.</p>
-</dd>
-</dl>
-</div></blockquote>
+increase the size of it or to open opposite position. Open an open position will close the other direction one.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol</strong> – It is the symbol you want to open or close or check if already have an operation opened.</p></li>
+<li><p><strong>lot</strong> – It is how many shares you want to trade, many symbols allow fractions and others requires a
+certain amount. It can be 0.01, 100.0, 1000.0, 10000.0.</p></li>
 <li><p><strong>stop_loss</strong> – It is how much you accept to lose. Example: If you buy a share for US$10.00, and you accept to lose US$1.00
 you set this variable at 1.00, you will be out of the operation at US$9.00 (sometimes more, somtime less,
 the US$9.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes

@@ -15,17 +15,18 @@ class Trade(trade.Trade):
                  stop_loss: float,
                  take_profit: float
                  ):
+
         """
         It is allowed to have only one position at time per symbol, right now it is not possible to open a position and
         increase the size of it or to open opposite position. Open an open position will close the other direction one.
+
         Args:
             symbol:
-                It is the symbol you want to open/close or check if already have an operation opened.
+                It is the symbol you want to open or close or check if already have an operation opened.
 
             lot:
                 It is how many shares you want to trade, many symbols allow fractions and others requires a
-                 certain amount. It can be: 0.01, 100.0, 1000.0, 10000.0.
-
+                certain amount. It can be 0.01, 100.0, 1000.0, 10000.0.
 
             stop_loss:
                 It is how much you accept to lose. Example: If you buy a share for US$10.00, and you accept to lose US$1.00
@@ -38,7 +39,9 @@ class Trade(trade.Trade):
                 you set this variable at 1.00, you will be out of the operation at US$11.00 (sometimes more, somtime less,
                 the US$11.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes
                 can be 1000 points.
+
         """
+
         self._log = log_manager.LogManager('metatrader5')
         self._log.logger.info('Logger Initialized in Trade')
 

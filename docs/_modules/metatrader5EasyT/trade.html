@@ -159,17 +159,18 @@
                  <span class="n">stop_loss</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                  <span class="n">take_profit</span><span class="p">:</span> <span class="nb">float</span>
                  <span class="p">):</span>
+
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        It is allowed to have only one position at time per symbol, right now it is not possible to open a position and</span>
 <span class="sd">        increase the size of it or to open opposite position. Open an open position will close the other direction one.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            symbol:</span>
-<span class="sd">                It is the symbol you want to open/close or check if already have an operation opened.</span>
+<span class="sd">                It is the symbol you want to open or close or check if already have an operation opened.</span>
 
 <span class="sd">            lot:</span>
 <span class="sd">                It is how many shares you want to trade, many symbols allow fractions and others requires a</span>
-<span class="sd">                 certain amount, like lot of 100, 1000, 10000.</span>
-
+<span class="sd">                certain amount. It can be 0.01, 100.0, 1000.0, 10000.0.</span>
 
 <span class="sd">            stop_loss:</span>
 <span class="sd">                It is how much you accept to lose. Example: If you buy a share for US$10.00, and you accept to lose US$1.00</span>
@@ -182,7 +183,9 @@
 <span class="sd">                you set this variable at 1.00, you will be out of the operation at US$11.00 (sometimes more, somtime less,</span>
 <span class="sd">                the US$11.00 is the trigger). Keep in mind that some symbols has different points metrics, US$1.00 sometimes</span>
 <span class="sd">                can be 1000 points.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="n">log_manager</span><span class="o">.</span><span class="n">LogManager</span><span class="p">(</span><span class="s1">&#39;metatrader5&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Logger Initialized in Trade&#39;</span><span class="p">)</span>
 
