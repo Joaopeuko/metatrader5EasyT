@@ -40,17 +40,21 @@ That is Ok, and, there are many ways you can help me, here is a list:
 # Installation:
 
 
-Keep in mind that it will only work on Windows.
+Keep in mind that it will **only work on Windows**.
 
 ```python
 pip install metatrader5EasyT
 ```
 
+If you want to know **how to use** and **examples**, please, see the link to the **documentation** below.  
+All the information will be there.
+
 # Libraries Documentation
 
-All the Libraries Documentation are linked below:
+All the Libraries Documentation and useful links are linked below:
 
-- [easyT]()
-  - [metatrader5EasyT](https://joaopeuko.github.io/metatrader5EasyT/)
+- easyT
+  - metatrader5EasyT - [Documentation](https://joaopeuko.github.io/metatrader5EasyT/) - [GitHub](https://github.com/Joaopeuko/metatrader5EasyT) - [Pypi](https://pypi.org/project/metatrader5EasyT/)
+- Mql5-Python-Integration - [GitHub](https://joaopeuko.github.io/Mql5-Python-Integration/)
 
-For this specific project, is this one [metatrader5EasyT](https://joaopeuko.github.io/metatrader5EasyT/).
+The documentation for this specific project is this one [metatrader5EasyT](https://joaopeuko.github.io/metatrader5EasyT/).
