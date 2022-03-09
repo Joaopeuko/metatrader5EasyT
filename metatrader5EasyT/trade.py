@@ -24,7 +24,7 @@ class Trade(trade.Trade):
 
             lot:
                 It is how many shares you want to trade, many symbols allow fractions and others requires a
-                 certain amount, like lot of 100, 1000, 10000.
+                 certain amount. It can be: 0.01, 100.0, 1000.0, 10000.0.
 
 
             stop_loss:
