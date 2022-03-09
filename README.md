@@ -37,6 +37,15 @@ That is Ok, and, there are many ways you can help me, here is a list:
       
   - And, there are **Ads** in all the documentations, that hopefully, will help me finance this project.
 
+# Installation:
+
+
+Keep in mind that it will only work on Windows.
+
+```python
+pip install metatrader5EasyT
+```
+
 # Libraries Documentation
 
 All the Libraries Documentation are linked below:
