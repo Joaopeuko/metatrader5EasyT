@@ -23,8 +23,9 @@ class Trade(trade.Trade):
                 It is the symbol you want to open/close or check if already have an operation opened.
 
             lot:
-                It is how many shares you want to trade, many symbols allow fractions and others requires a certain amount,
-                like lot of 100, 1000, 10000.
+                It is how many shares you want to trade, many symbols allow fractions and others requires a
+                 certain amount, like lot of 100, 1000, 10000.
+
 
             stop_loss:
                 It is how much you accept to lose. Example: If you buy a share for US$10.00, and you accept to lose US$1.00
