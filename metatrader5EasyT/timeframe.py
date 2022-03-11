@@ -7,6 +7,9 @@ class TimeFrame(timeframe.TimeFrame):
     """
     There are incompatibilities and different patterns in writing the timeframe between platforms.
     This class attend to reduce the chance of errors providing the same timeframe structure between platforms.
+
+    Examples:
+        You can find an example of the TimeFrame usage in update_rates() function in Rates documentation
     """
     def __init__(self):
         self._log = log_manager.LogManager('metatrader5')

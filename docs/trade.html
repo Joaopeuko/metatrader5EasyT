@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6X7Z31G05"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G6X7Z31G05');
+    </script>
+
       <title>Trade</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -69,7 +78,7 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt-documentation">metatrader5easyt documentation:</a></span>
       </p>
       <ul class="current">
         
@@ -136,7 +145,7 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-      <li><a href="metatrader5EasyT.html">metatrader5EasyT</a> &raquo;</li>
+      <li><a href="metatrader5EasyT.html">Metatrader5EasyT Documentation:</a> &raquo;</li>
     
     <li>Trade</li>
   </ul>
@@ -195,6 +204,21 @@ can be 1000 points.</p></li>
 <dd class="field-even"><p>It returns the float price normalized under a precision that is accepted by the platform.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.trade</span> <span class="kn">import</span> <span class="n">Trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span> <span class="o">=</span> <span class="n">Trade</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">lot</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_loss</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">take_profit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The normalize function is used inside other functions, but the idea is to normalize the value to</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># be accepted in the trade request. If you want to see this function in action you can look at</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># open_buy() and open_sell()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="mf">12.3456789</span><span class="p">)</span>
+<span class="go">12.34</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -206,6 +230,33 @@ can be 1000 points.</p></li>
 <dd class="field-odd"><p>It returns None, but if an error occurs when open a position it will break.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Try this on your demo account with fake money, a position will be opened.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.trade</span> <span class="kn">import</span> <span class="n">Trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="go">2022-03-11 04:47:29,903 WARNING - initialize_platform - &quot;Algotrading&quot; not allowed! You cannot open position,</span>
+<span class="go">but you can retrieve data. If you want to open positions, please, go to Metatrader5 and press the button</span>
+<span class="go">&quot;Algotrading.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span> <span class="o">=</span> <span class="n">Trade</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">lot</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_loss</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">take_profit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When I try to open a position and the Algotrading is not allowed on Metatrader5 I got a warning.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">open_buy</span><span class="p">()</span>
+<span class="go">2022-03-11 04:48:37,068 ERROR - open_buy - Something went wrong: Position Not Found for symbol EURUSD!</span>
+<span class="go">Last Error: (1, &#39;Success&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But when I allow algotrading, I return None, you can see at Metatrader5 that a buy</span>
+<span class="go">position was opened.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">open_buy</span><span class="p">()</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Just for curiosity, if you want to try to open a sell position with this buy opened you will close</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># the buy position</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">open_sell</span><span class="p">()</span>
+<span class="go">None</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -217,6 +268,33 @@ can be 1000 points.</p></li>
 <dd class="field-odd"><p>It returns None, but if an error occurs when open a position it will break.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Try this on your demo account with fake money, a position will be opened.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.trade</span> <span class="kn">import</span> <span class="n">Trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="go">2022-03-11 04:47:29,903 WARNING - initialize_platform - &quot;Algotrading&quot; not allowed! You cannot open position,</span>
+<span class="go">but you can retrieve data. If you want to open positions, please, go to Metatrader5 and press the button</span>
+<span class="go">&quot;Algotrading.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span> <span class="o">=</span> <span class="n">Trade</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">lot</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_loss</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">take_profit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When I try to open a position and the Algotrading is not allowed on Metatrader5 I got a warning.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">open_sell</span><span class="p">()</span>
+<span class="go">2022-03-11 04:57:08,628 ERROR - open_sell - Something went wrong: Position Not Found for symbol EURUSD!</span>
+<span class="go">Last Error: (1, &#39;Success&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But when I allow algotrading, I return None, you can see at Metatrader5 that a buy</span>
+<span class="go">position was opened.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">open_sell</span><span class="p">()</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Just for curiosity, if you want to try to open a buy position with this sell opened you will close</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># the sell position</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">open_buy</span><span class="p">()</span>
+<span class="go">None</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -230,6 +308,44 @@ direction, which can be ‘sell’ or ‘buy’.</p>
 <dd class="field-odd"><p>This function update the variable self.trade_direction and do not return a result.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Try this on your demo account with fake money, a position will be opened.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.trade</span> <span class="kn">import</span> <span class="n">Trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span> <span class="o">=</span> <span class="n">Trade</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">lot</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_loss</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">take_profit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">_trade_allowed</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Position check it is just to ensure that the eurusd_trade.trade_direction are in the right direction.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The eurusd_trade.trade_direction is automatically handled by buy open_sell() and open_buy() and</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># it returns the trade direction or None when there is no trade opened.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># After I open a buy position, it returns &#39;buy&#39; to trade_direction, but, what happens if I manually</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># change the direction?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="s1">&#39;coffee shop&#39;</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span>
+<span class="go">&#39;coffee shop&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># It is possible to see that the trade_direction was changed.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># and the position_check() is called in all the functions that opens and closes position</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># to ensure that direction is correct, I will call position_check() to fix my change to &#39;coffee shop&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># It worked.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># That is it, I will just the position that I opened before.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_close</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -242,11 +358,46 @@ If there is no position nothing happens.</p>
 <dd class="field-odd"><p>Close the current position by opening an opposite one.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Try this on your demo account with fake money, a position will be opened.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.trade</span> <span class="kn">import</span> <span class="n">Trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span> <span class="o">=</span> <span class="n">Trade</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">lot</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_loss</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">take_profit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">_trade_allowed</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Opening a position with Algotrading allowed and, eurusd_trade._trade_allowed True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># To know more about eurusd_trade._trade_allowed look the Examples in position_open() documentation.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;sell&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When there is a position opened, eurusd_trade.position_close() will open a position in a different</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># direction to close it.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_close</span><span class="p">()</span>
+<span class="go">None</span>
+<span class="go"># It checks the trading direction, return none when there is no trade opened.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span>
+<span class="go">None</span>
+<span class="go"># I will open a buy position, check the trade direction and close it!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span> <span class="n">eurusd_trade</span><span class="o">.</span><span class="n">trade_direction</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can see that it worked!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># What happens when I call eurusd_trade.position_close() with no position opened?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_close</span><span class="p">()</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Nothing happens, there are no position to be closed.</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="metatrader5EasyT.trade.Trade.position_open">
-<span class="sig-name descname"><span class="pre">position_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sell</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.position_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.position_open" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">position_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">buy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sell</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/trade.html#Trade.position_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.trade.Trade.position_open" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function receives two bool variables, buy and sell, if one of this variable is true and the other is false,
 it opens a position to the side that is true, if both variable is true or both variable is false, it does not
 open a position.</p>
@@ -262,7 +413,56 @@ open a position.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<p>Try this on your demo account with fake money, a position will be opened.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.trade</span> <span class="kn">import</span> <span class="n">Trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="go">2022-03-11 04:47:29,903 WARNING - initialize_platform - &quot;Algotrading&quot; not allowed! You cannot open position,</span>
+<span class="go">but you can retrieve data. If you want to open positions, please, go to Metatrader5 and press the button</span>
+<span class="go">&quot;Algotrading.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span> <span class="o">=</span> <span class="n">Trade</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">lot</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">stop_loss</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">take_profit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When I try to open a position and the Algotrading is not allowed on Metatrader5, return None&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># I allowed Algotrading, but when I try again, I receive None again.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># That behavior is happening because the attribute eurusd_trade._trade_allowed, is False as default.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">_trade_allowed</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># This attribute will be handled in another project, that is why it exists.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Let assign to True and see what happens:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">_trade_allowed</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">_trade_allowed</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Let try to open a position.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># It worked, lets try to double the position calling it again</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The function returns &#39;buy&#39;, but another position was not opened, it returns the current trade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># direction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># I will call an opposite direction to see what happens:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;buy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The function returns &#39;buy&#39;, the position was not closed by trying to open another one in the opposite</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># direction. No new position was opened, and it returns the current trade direction.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># I will close this position with eurusd_trade.position_close(), you can check what it does in the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># function documentation position_close()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_close</span><span class="p">()</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># To finish, let see what happens if both arguments are True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Nothing happens, but when both are False?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_trade</span><span class="o">.</span><span class="n">position_open</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Nothing happens</span>
 </pre></div>
 </div>
 </dd></dl>

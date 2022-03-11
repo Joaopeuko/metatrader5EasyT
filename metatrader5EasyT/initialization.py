@@ -32,11 +32,22 @@ class Initialize(initialization.Initialize):
         This function is responsible to initialize the platform that will be used to trade.
 
         Raises:
-            PlatformNotInitialized: Raise this error when the Metatrader5 is not installed or not possible to load
-            it for some reason.
+            PlatformNotInitialized:
+                Raise this error when the Metatrader5 is not installed or not possible to load
+                it for some reason.
 
         Returns:
             It returns true if initialized else return false.
+
+        Examples:
+            >>> # All the code you need to execute the function:
+            >>> from metatrader5EasyT.initialization import Initialize
+            >>> initialize = Initialize()
+            >>> # The function and the function return:
+            >>> initialize.initialize_platform()
+            True
+
+
         """
         self._log.logger.info('Initializing Metatrader5.')
         initialization_result = Mt5.initialize()
@@ -70,6 +81,18 @@ class Initialize(initialization.Initialize):
         Returns:
             When the symbol is successfully initialized it returns True and, it updates the list
             self.symbol_initialized if you want to work with the symbols correctly initialized.
+
+        Examples:
+            >>> # All the code you need to execute the function:
+            >>> from metatrader5EasyT.initialization import Initialize
+            >>> initialize = Initialize()
+            >>> initialize.initialize_platform()
+            >>> # The function and the function return:
+            >>> initialize.initialize_symbol('EURUSD')
+            True
+            >>> # Check initialize.symbol_initialized to see the list of initialized symbols
+            ['EURUSD']
+
         """
         self._log.logger.info('Initializing symbols.')
         for symbol in symbols:

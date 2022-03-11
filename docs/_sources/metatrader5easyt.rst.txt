@@ -1,8 +1,8 @@
-metatrader5EasyT
-================
+Metatrader5EasyT Documentation:
+===============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
    initialization
    rates

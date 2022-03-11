@@ -67,7 +67,7 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="../../metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+        <span class="caption-text"><a href="../../metatrader5EasyT.html#metatrader5easyt-documentation">metatrader5easyt documentation:</a></span>
       </p>
       <ul class="">
         
@@ -211,6 +211,22 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            It returns the float price normalized under a precision that is accepted by the platform.</span>
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">            &gt;&gt;&gt; # All the code you need to execute the function:</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.initialization import Initialize</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.trade import Trade</span>
+<span class="sd">            &gt;&gt;&gt; initialize = Initialize()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_platform()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_symbol(&#39;EURUSD&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade = Trade(symbol=&#39;EURUSD&#39;, lot=1.0, stop_loss=1.0, take_profit=1.0)</span>
+<span class="sd">            &gt;&gt;&gt; # The normalize function is used inside other functions, but the idea is to normalize the value to</span>
+<span class="sd">            &gt;&gt;&gt; # be accepted in the trade request. If you want to see this function in action you can look at</span>
+<span class="sd">            &gt;&gt;&gt; # open_buy() and open_sell()</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.normalize(12.3456789)</span>
+<span class="sd">            12.34</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Normalizing the price&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">*</span> <span class="nb">round</span><span class="p">(</span><span class="n">price</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span></div>
@@ -221,6 +237,35 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            It returns None, but if an error occurs when open a position it will break.</span>
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">            Try this on your demo account with fake money, a position will be opened.</span>
+
+<span class="sd">            &gt;&gt;&gt; # All the code you need to execute the function:</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.initialization import Initialize</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.trade import Trade</span>
+<span class="sd">            &gt;&gt;&gt; initialize = Initialize()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_platform()</span>
+<span class="sd">            True</span>
+<span class="sd">            2022-03-11 04:47:29,903 WARNING - initialize_platform - &quot;Algotrading&quot; not allowed! You cannot open position,</span>
+<span class="sd">            but you can retrieve data. If you want to open positions, please, go to Metatrader5 and press the button</span>
+<span class="sd">            &quot;Algotrading.&quot;</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_symbol(&#39;EURUSD&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade = Trade(symbol=&#39;EURUSD&#39;, lot=1.0, stop_loss=1.0, take_profit=1.0)</span>
+<span class="sd">            &gt;&gt;&gt; # When I try to open a position and the Algotrading is not allowed on Metatrader5 I got a warning.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.open_buy()</span>
+<span class="sd">            2022-03-11 04:48:37,068 ERROR - open_buy - Something went wrong: Position Not Found for symbol EURUSD!</span>
+<span class="sd">            Last Error: (1, &#39;Success&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; # But when I allow algotrading, I return None, you can see at Metatrader5 that a buy</span>
+<span class="sd">            position was opened.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.open_buy()</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # Just for curiosity, if you want to try to open a sell position with this buy opened you will close</span>
+<span class="sd">            &gt;&gt;&gt; # the buy position</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.open_sell()</span>
+<span class="sd">            None</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">price</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">symbol_info_tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">ask</span>
 
@@ -266,6 +311,35 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            It returns None, but if an error occurs when open a position it will break.</span>
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">            Try this on your demo account with fake money, a position will be opened.</span>
+
+<span class="sd">            &gt;&gt;&gt; # All the code you need to execute the function:</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.initialization import Initialize</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.trade import Trade</span>
+<span class="sd">            &gt;&gt;&gt; initialize = Initialize()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_platform()</span>
+<span class="sd">            True</span>
+<span class="sd">            2022-03-11 04:47:29,903 WARNING - initialize_platform - &quot;Algotrading&quot; not allowed! You cannot open position,</span>
+<span class="sd">            but you can retrieve data. If you want to open positions, please, go to Metatrader5 and press the button</span>
+<span class="sd">            &quot;Algotrading.&quot;</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_symbol(&#39;EURUSD&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade = Trade(symbol=&#39;EURUSD&#39;, lot=1.0, stop_loss=1.0, take_profit=1.0)</span>
+<span class="sd">            &gt;&gt;&gt; # When I try to open a position and the Algotrading is not allowed on Metatrader5 I got a warning.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.open_sell()</span>
+<span class="sd">            2022-03-11 04:57:08,628 ERROR - open_sell - Something went wrong: Position Not Found for symbol EURUSD!</span>
+<span class="sd">            Last Error: (1, &#39;Success&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; # But when I allow algotrading, I return None, you can see at Metatrader5 that a buy</span>
+<span class="sd">            position was opened.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.open_sell()</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # Just for curiosity, if you want to try to open a buy position with this sell opened you will close</span>
+<span class="sd">            &gt;&gt;&gt; # the sell position</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.open_buy()</span>
+<span class="sd">            None</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">price</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">symbol_info_tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">bid</span>
 
@@ -304,7 +378,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Change trade direction to SELL.&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trade_direction</span> <span class="o">=</span> <span class="s1">&#39;sell&#39;</span></div>
 
-<div class="viewcode-block" id="Trade.position_open"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.position_open">[docs]</a>    <span class="k">def</span> <span class="nf">position_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buy</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">sell</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Trade.position_open"><a class="viewcode-back" href="../../trade.html#metatrader5EasyT.trade.Trade.position_open">[docs]</a>    <span class="k">def</span> <span class="nf">position_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buy</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">sell</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function receives two bool variables, buy and sell, if one of this variable is true and the other is false,</span>
 <span class="sd">        it opens a position to the side that is true, if both variable is true or both variable is false, it does not</span>
@@ -321,8 +395,58 @@
 <span class="sd">            It opens the position.</span>
 
 <span class="sd">        Examples:</span>
-<span class="sd">            &gt;&gt;&gt;  position_open(True, False)</span>
 
+<span class="sd">            Try this on your demo account with fake money, a position will be opened.</span>
+
+<span class="sd">            &gt;&gt;&gt; # All the code you need to execute the function:</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.initialization import Initialize</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.trade import Trade</span>
+<span class="sd">            &gt;&gt;&gt; initialize = Initialize()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_platform()</span>
+<span class="sd">            True</span>
+<span class="sd">            2022-03-11 04:47:29,903 WARNING - initialize_platform - &quot;Algotrading&quot; not allowed! You cannot open position,</span>
+<span class="sd">            but you can retrieve data. If you want to open positions, please, go to Metatrader5 and press the button</span>
+<span class="sd">            &quot;Algotrading.&quot;</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_symbol(&#39;EURUSD&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade = Trade(symbol=&#39;EURUSD&#39;, lot=1.0, stop_loss=1.0, take_profit=1.0)</span>
+<span class="sd">            &gt;&gt;&gt; # When I try to open a position and the Algotrading is not allowed on Metatrader5, return None&#39;</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, False)</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # I allowed Algotrading, but when I try again, I receive None again.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, False)</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # That behavior is happening because the attribute eurusd_trade._trade_allowed, is False as default.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade._trade_allowed</span>
+<span class="sd">            False</span>
+<span class="sd">            &gt;&gt;&gt; # This attribute will be handled in another project, that is why it exists.</span>
+<span class="sd">            &gt;&gt;&gt; # Let assign to True and see what happens:</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade._trade_allowed = True</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade._trade_allowed</span>
+<span class="sd">            True</span>
+<span class="sd">            &gt;&gt;&gt; # Let try to open a position.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, False)</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # It worked, lets try to double the position calling it again</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, False)</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # The function returns &#39;buy&#39;, but another position was not opened, it returns the current trade</span>
+<span class="sd">            &gt;&gt;&gt; # direction</span>
+<span class="sd">            &gt;&gt;&gt; # I will call an opposite direction to see what happens:</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(False, True)</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # The function returns &#39;buy&#39;, the position was not closed by trying to open another one in the opposite</span>
+<span class="sd">            &gt;&gt;&gt; # direction. No new position was opened, and it returns the current trade direction.</span>
+<span class="sd">            &gt;&gt;&gt; # I will close this position with eurusd_trade.position_close(), you can check what it does in the</span>
+<span class="sd">            &gt;&gt;&gt; # function documentation position_close()</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_close()</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # To finish, let see what happens if both arguments are True</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, True)</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # Nothing happens, but when both are False?</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(False, False)</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # Nothing happens</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Open position called. Buy is </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">buy</span><span class="p">)</span><span class="si">}</span><span class="s1">, and sell is </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">sell</span><span class="p">)</span><span class="si">}</span><span class="s1">. Trade allowed is &#39;</span>
@@ -349,6 +473,44 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Close the current position by opening an opposite one.</span>
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">            Try this on your demo account with fake money, a position will be opened.</span>
+
+<span class="sd">            &gt;&gt;&gt; # All the code you need to execute the function:</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.initialization import Initialize</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.trade import Trade</span>
+<span class="sd">            &gt;&gt;&gt; initialize = Initialize()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_platform()</span>
+<span class="sd">            True</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_symbol(&#39;EURUSD&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade = Trade(symbol=&#39;EURUSD&#39;, lot=1.0, stop_loss=1.0, take_profit=1.0)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade._trade_allowed = True</span>
+<span class="sd">            &gt;&gt;&gt; # Opening a position with Algotrading allowed and, eurusd_trade._trade_allowed True</span>
+<span class="sd">            &gt;&gt;&gt; # To know more about eurusd_trade._trade_allowed look the Examples in position_open() documentation.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(False, True)</span>
+<span class="sd">            &#39;sell&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # When there is a position opened, eurusd_trade.position_close() will open a position in a different</span>
+<span class="sd">            &gt;&gt;&gt; # direction to close it.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_close()</span>
+<span class="sd">            None</span>
+<span class="sd">            # It checks the trading direction, return none when there is no trade opened.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.trade_direction</span>
+<span class="sd">            None</span>
+<span class="sd">            # I will open a buy position, check the trade direction and close it!</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, False)</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt;  eurusd_trade.trade_direction</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_close()</span>
+<span class="sd">            &gt;&gt;&gt; # We can see that it worked!</span>
+<span class="sd">            &gt;&gt;&gt; # What happens when I call eurusd_trade.position_close() with no position opened?</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_close()</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; # Nothing happens, there are no position to be closed.</span>
+
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Close position called.&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">position_check</span><span class="p">()</span>
@@ -370,6 +532,47 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            This function update the variable self.trade_direction and do not return a result.</span>
+
+<span class="sd">        Examples:</span>
+
+<span class="sd">            Try this on your demo account with fake money, a position will be opened.</span>
+
+<span class="sd">            &gt;&gt;&gt; # All the code you need to execute the function:</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.initialization import Initialize</span>
+<span class="sd">            &gt;&gt;&gt; from metatrader5EasyT.trade import Trade</span>
+<span class="sd">            &gt;&gt;&gt; initialize = Initialize()</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_platform()</span>
+<span class="sd">            True</span>
+<span class="sd">            &gt;&gt;&gt; initialize.initialize_symbol(&#39;EURUSD&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade = Trade(symbol=&#39;EURUSD&#39;, lot=1.0, stop_loss=1.0, take_profit=1.0)</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade._trade_allowed = True</span>
+<span class="sd">            &gt;&gt;&gt; # Position check it is just to ensure that the eurusd_trade.trade_direction are in the right direction.</span>
+<span class="sd">            &gt;&gt;&gt; # The eurusd_trade.trade_direction is automatically handled by buy open_sell() and open_buy() and</span>
+<span class="sd">            &gt;&gt;&gt; # it returns the trade direction or None when there is no trade opened.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.trade_direction</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_open(True, False)</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.trade_direction</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # After I open a buy position, it returns &#39;buy&#39; to trade_direction, but, what happens if I manually</span>
+<span class="sd">            &gt;&gt;&gt; # change the direction?</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.trade_direction = &#39;coffee shop&#39;</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.trade_direction</span>
+<span class="sd">            &#39;coffee shop&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # It is possible to see that the trade_direction was changed.</span>
+<span class="sd">            &gt;&gt;&gt; # and the position_check() is called in all the functions that opens and closes position</span>
+<span class="sd">            &gt;&gt;&gt; # to ensure that direction is correct, I will call position_check() to fix my change to &#39;coffee shop&#39;</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_check()</span>
+<span class="sd">            None</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.trade_direction</span>
+<span class="sd">            &#39;buy&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # It worked.</span>
+<span class="sd">            &gt;&gt;&gt; # That is it, I will just the position that I opened before.</span>
+<span class="sd">            &gt;&gt;&gt; eurusd_trade.position_close()</span>
+
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Calls Metatrader5 to check if there is a position opened.&#39;</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">Mt5</span><span class="o">.</span><span class="n">positions_get</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>

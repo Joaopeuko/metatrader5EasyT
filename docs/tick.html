@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6X7Z31G05"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G6X7Z31G05');
+    </script>
+
       <title>Tick</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -70,7 +79,7 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt-documentation">metatrader5easyt documentation:</a></span>
       </p>
       <ul class="current">
         
@@ -137,7 +146,7 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-      <li><a href="metatrader5EasyT.html">metatrader5EasyT</a> &raquo;</li>
+      <li><a href="metatrader5EasyT.html">Metatrader5EasyT Documentation:</a> &raquo;</li>
     
     <li>Tick</li>
   </ul>
@@ -175,6 +184,20 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.tick.Tick.change_symbol">
+<span class="sig-name descname"><span class="pre">change_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/tick.html#Tick.change_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.tick.Tick.change_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function changes the symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_symbol</strong> – It receives the new symbol</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It updates the self._symbol to the new symbol.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="metatrader5EasyT.tick.Tick.get_new_tick">
 <span class="sig-name descname"><span class="pre">get_new_tick</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/tick.html#Tick.get_new_tick"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.tick.Tick.get_new_tick" title="Permalink to this definition">¶</a></dt>
 <dd><p>Everytime this function is called it update the last tick information, it is important to have update
@@ -184,6 +207,32 @@ information know the most recent information.</p>
 <dd class="field-odd"><p>It updates the attributes in the constructor.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.tick</span> <span class="kn">import</span> <span class="n">Tick</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># It will return the most recent information, but it will return None at the first time.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The tick need the information to be updated everytime.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_tick</span> <span class="o">=</span> <span class="n">Tick</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_tick</span><span class="o">.</span><span class="n">ask</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When you update the tick:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_tick</span><span class="o">.</span><span class="n">get_new_tick</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_tick</span><span class="o">.</span><span class="n">ask</span>
+<span class="go">1.09975</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_tick</span><span class="o">.</span><span class="n">bid</span>
+<span class="go">1.09975</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You must have notice that I used bid and ask, some exchanges do not return the last value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># You can find only the information for bid and ask. If you try to return last it will print 0.0.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But remember, not all the exchanges do that, you must check it.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_tick</span><span class="o">.</span><span class="n">last</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>You can ask for this information: time, bid, ask, last, volume.</p>
 </dd></dl>
 
 </dd></dl>

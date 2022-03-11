@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6X7Z31G05"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G6X7Z31G05');
+    </script>
+
       <title>Initialization</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,7 +32,7 @@
   <link rel="index" title="Index" href="genindex.html" />
   <link rel="search" title="Search" href="search.html" />
   <link rel="next" title="Rates" href="rates.html" />
-  <link rel="prev" title="metatrader5EasyT" href="metatrader5EasyT.html" /> 
+  <link rel="prev" title="Metatrader5EasyT Documentation:" href="metatrader5EasyT.html" /> 
   </head>
 
   <body>
@@ -70,7 +79,7 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt-documentation">metatrader5easyt documentation:</a></span>
       </p>
       <ul class="current">
         
@@ -82,7 +91,7 @@
             
               <ul>
                 
-                  <li class="toctree-l2"><a href="#initialization" class="reference internal">Initialization</a></li>
+                  <li class="toctree-l2"><a href="#module-metatrader5EasyT.initialization" class="reference internal">Initialization</a></li>
                 
               </ul>
             
@@ -137,7 +146,7 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-      <li><a href="metatrader5EasyT.html">metatrader5EasyT</a> &raquo;</li>
+      <li><a href="metatrader5EasyT.html">Metatrader5EasyT Documentation:</a> &raquo;</li>
     
     <li>Initialization</li>
   </ul>
@@ -146,7 +155,7 @@
   <ul class="page-nav">
   <li class="prev">
     <a href="metatrader5EasyT.html"
-       title="previous chapter">← metatrader5EasyT</a>
+       title="previous chapter">← Metatrader5EasyT Documentation:</a>
   </li>
   <li class="next">
     <a href="rates.html"
@@ -158,9 +167,9 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <section id="initialization">
-<h1>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-metatrader5EasyT.initialization"></span><dl class="py class">
+  <section id="module-metatrader5EasyT.initialization">
+<span id="initialization"></span><h1>Initialization<a class="headerlink" href="#module-metatrader5EasyT.initialization" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
 <dt class="sig sig-object py" id="metatrader5EasyT.initialization.Initialize">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">metatrader5EasyT.initialization.</span></span><span class="sig-name descname"><span class="pre">Initialize</span></span><a class="reference internal" href="_modules/metatrader5EasyT/initialization.html#Initialize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.initialization.Initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class ensure that the platform are working properly.
@@ -177,15 +186,22 @@ If it is connected on the internet, and if the symbol that you are trying to use
 <dd><p>This function is responsible to initialize the platform that will be used to trade.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#metatrader5EasyT.initialization.PlatformNotInitialized" title="metatrader5EasyT.initialization.PlatformNotInitialized"><strong>PlatformNotInitialized</strong></a> – Raise this error when the Metatrader5 is not installed or not possible to load</p></li>
-<li><p><strong>it for some reason.</strong> – </p></li>
-</ul>
+<dd class="field-odd"><p><a class="reference internal" href="#metatrader5EasyT.initialization.PlatformNotInitialized" title="metatrader5EasyT.initialization.PlatformNotInitialized"><strong>PlatformNotInitialized</strong></a> – Raise this error when the Metatrader5 is not installed or not possible to load
+    it for some reason.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>It returns true if initialized else return false.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The function and the function return:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -204,6 +220,18 @@ If it is connected on the internet, and if the symbol that you are trying to use
 self.symbol_initialized if you want to work with the symbols correctly initialized.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The function and the function return:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check initialize.symbol_initialized to see the list of initialized symbols</span>
+<span class="go">[&#39;EURUSD&#39;]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -228,7 +256,7 @@ self.symbol_initialized if you want to work with the symbols correctly initializ
             <div class="inner"><ul class="page-nav">
   <li class="prev">
     <a href="metatrader5EasyT.html"
-       title="previous chapter">← metatrader5EasyT</a>
+       title="previous chapter">← Metatrader5EasyT Documentation:</a>
   </li>
   <li class="next">
     <a href="rates.html"

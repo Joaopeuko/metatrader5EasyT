@@ -40,7 +40,8 @@ extensions = [
    'sphinx.ext.ifconfig',
    'sphinx.ext.viewcode',
    'sphinx.ext.githubpages',
-   'sphinx.ext.napoleon']
+   'sphinx.ext.napoleon',
+   'sphinx.ext.autosummary',]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -57,6 +58,7 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 html_theme = 'press'
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

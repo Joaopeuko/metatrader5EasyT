@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6X7Z31G05"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G6X7Z31G05');
+    </script>
+
       <title>Rates</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -70,7 +79,7 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt">metatrader5easyt</a></span>
+        <span class="caption-text"><a href="metatrader5EasyT.html#metatrader5easyt-documentation">metatrader5easyt documentation:</a></span>
       </p>
       <ul class="current">
         
@@ -137,7 +146,7 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-      <li><a href="metatrader5EasyT.html">metatrader5EasyT</a> &raquo;</li>
+      <li><a href="metatrader5EasyT.html">Metatrader5EasyT Documentation:</a> &raquo;</li>
     
     <li>Rates</li>
   </ul>
@@ -182,6 +191,70 @@ candlesticks.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.rates.Rates.change_count">
+<span class="sig-name descname"><span class="pre">change_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/rates.html#Rates.change_count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.rates.Rates.change_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function changes the count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_count</strong> – It receives the new new_count</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It updates the self._count to the new count.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.timeframe</span> <span class="kn">import</span> <span class="n">TimeFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.rates</span> <span class="kn">import</span> <span class="n">Rates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timeframe</span> <span class="o">=</span> <span class="n">TimeFrame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># it will get the last 20 one minute candlestick information.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span> <span class="o">=</span> <span class="n">Rates</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="o">.</span><span class="n">ONE_MINUTE</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">update_rates</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># When you change the count, you need to update the information, and you can see that it worked.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">change_count</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">update_rates</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>You can ask for this information: time, open, high, low, close, tick_volume.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.rates.Rates.change_symbol">
+<span class="sig-name descname"><span class="pre">change_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/rates.html#Rates.change_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.rates.Rates.change_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function changes the symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_symbol</strong> – It receives the new symbol</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It updates the self._symbol to the new symbol.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="metatrader5EasyT.rates.Rates.change_timeframe">
+<span class="sig-name descname"><span class="pre">change_timeframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_timeframe</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="timeframe.html#metatrader5EasyT.timeframe.TimeFrame" title="metatrader5EasyT.timeframe.TimeFrame"><span class="pre">metatrader5EasyT.timeframe.TimeFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/rates.html#Rates.change_timeframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.rates.Rates.change_timeframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function changes the timeframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_timeframe</strong> – It receives the new timeframe</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>It updates the self._timeframe to the new timeframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="metatrader5EasyT.rates.Rates.update_rates">
 <span class="sig-name descname"><span class="pre">update_rates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/metatrader5EasyT/rates.html#Rates.update_rates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#metatrader5EasyT.rates.Rates.update_rates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Everytime this function is called it update the last values, it is important to have update information to
@@ -191,6 +264,31 @@ calculate indicators and ensure your trading strategy is working properly.</p>
 <dd class="field-odd"><p>It updates the attributes in the constructor.</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># All the code you need to execute the function:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.initialization</span> <span class="kn">import</span> <span class="n">Initialize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.timeframe</span> <span class="kn">import</span> <span class="n">TimeFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">metatrader5EasyT.rates</span> <span class="kn">import</span> <span class="n">Rates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span> <span class="o">=</span> <span class="n">Initialize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_platform</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timeframe</span> <span class="o">=</span> <span class="n">TimeFrame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initialize</span><span class="o">.</span><span class="n">initialize_symbol</span><span class="p">(</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># it will get the last 20 one minute candlestick information, but it will return none at the first time.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># the rates need the information to be updated everytime.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span> <span class="o">=</span> <span class="n">Rates</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;EURUSD&#39;</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="n">timeframe</span><span class="o">.</span><span class="n">ONE_MINUTE</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The first time, if you try to get a rates information of the close price you will receive None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">close</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But when you update the rates, the prices will be updated.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">update_rates</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># And the rates will be returned for the information you want.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eurusd_rates</span><span class="o">.</span><span class="n">close</span>
+<span class="go">array([1.10324, 1.10342, 1.10329, 1.10338, 1.10294, 1.10238, 1.10188,</span>
+<span class="go">1.10186, 1.10221, 1.10172, 1.1013 , 1.10069, 1.10097, 1.10104,</span>
+<span class="go">1.10081, 1.1003 , 1.10036, 1.10147, 1.10068, 1.10072])</span>
+</pre></div>
+</div>
+<p>You can ask for this information: time, open, high, low, close, tick_volume.</p>
 </dd></dl>
 
 </dd></dl>
