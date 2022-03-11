@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as requirements_file:
 
 setuptools.setup(
     name='metatrader5EasyT',
-    version='0.1.9',
+    version='0.1.10',
     license='MIT',
     author="Joao Paulo Euko",
     url='https://github.com/Joaopeuko/metatrader5EasyT',
