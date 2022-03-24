@@ -1,7 +1,7 @@
 Welcome!
 ========
 
-Just to remember, I would like you to reflect about the fact that **$1.00 Dollar** might be **not**
+Just as a reminder, I would like you to reflect about the fact that **$1.00 Dollar** might be **not**
 that **much** to you, but **you, an incredible person**, combined to other's **amazing Sponsors**, can **finance** this
 project, and it will **allows me** to constantly **improve and maintain** it, **and, I am not asking that much**.
 
