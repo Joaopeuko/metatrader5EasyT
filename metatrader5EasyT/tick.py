@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import MetaTrader5 as Mt5
 from abstractEasyT import tick
 from supportLibEasyT import log_manager
@@ -78,7 +80,7 @@ class Tick(tick.Tick):
         self._log.logger.info('Tick updated')
         result = Mt5.symbol_info_tick(self._symbol)
 
-        self.time = result.time
+        self.time = datetime.fromtimestamp(result.time)
         self.bid = result.bid
         self.ask = result.ask
         self.last = result.last
