@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import MetaTrader5
 
 from unittest.mock import patch
@@ -32,7 +34,7 @@ class TestTick:
 
         tick.get_new_tick()
 
-        assert type(tick.time) == int
+        assert type(tick.time) == datetime
         assert type(tick.bid) == float
         assert type(tick.ask) == float
         assert type(tick.last) == float
