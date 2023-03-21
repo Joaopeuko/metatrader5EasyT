@@ -26,7 +26,9 @@ All the information will be there.
 All the Libraries Documentation and useful links are linked below:
 
 - easyT
-  - metatrader5EasyT - [Documentation](https://joaopeuko.github.io/metatrader5EasyT/) - [GitHub](https://github.com/Joaopeuko/metatrader5EasyT) - [Pypi](https://pypi.org/project/metatrader5EasyT/)
-- Mql5-Python-Integration - [GitHub](https://joaopeuko.github.io/Mql5-Python-Integration/)
+  - binanceSpotEasyT - [Documentation](https://www.mydocumentations.com/binance-spot/index.html) - [GitHub](https://github.com/Joaopeuko/binanceSpotEasyT) - [Pypi](https://pypi.org/project/binanceSpotEasyT/)
+  - metatrader5EasyT - [Documentation](https://www.mydocumentations.com/mt5/index.html) - [GitHub](https://github.com/Joaopeuko/metatrader5EasyT) - [Pypi](https://pypi.org/project/metatrader5EasyT/)
 
-The documentation for this specific project is this one [metatrader5EasyT](https://joaopeuko.github.io/metatrader5EasyT/).
+The documentation for this specific project is this one [metatrader5EasyT](https://www.mydocumentations.com/mt5/index.html).
+
+See my page ([Joao Paulo Euko](https://joaopeuko.com/)) to see all my projects or for more information.
