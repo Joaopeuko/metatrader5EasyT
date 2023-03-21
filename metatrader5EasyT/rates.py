@@ -10,10 +10,7 @@ class Rates(rates.Rates):
     This class is responsible to retrieve a certain amount of previous data.
     """
 
-    def __init__(self,
-                 symbol: str,
-                 timeframe: TimeFrame,
-                 count: int):
+    def __init__(self, symbol: str, timeframe: TimeFrame, count: int):
         """
         Args:
             symbol:
@@ -29,8 +26,8 @@ class Rates(rates.Rates):
                 candlesticks.
         """
 
-        self._log = log_manager.LogManager('metatrader5')
-        self._log.logger.info('Logger Initialized in Rates')
+        self._log = log_manager.LogManager("metatrader5")
+        self._log.logger.info("Logger Initialized in Rates")
 
         self._timeframe = timeframe
         self._symbol = symbol.upper()
@@ -104,7 +101,7 @@ class Rates(rates.Rates):
 
             You can ask for this information: time, open, high, low, close, tick_volume.
 
-       """
+        """
         self._count = new_count
 
     def update_rates(self) -> None:
@@ -142,12 +139,12 @@ class Rates(rates.Rates):
 
         """
 
-        self._log.logger.info('Rates updated')
+        self._log.logger.info("Rates updated")
         result = Mt5.copy_rates_from_pos(self._symbol, self._timeframe, 0, self._count)
 
-        self.time = result['time']
-        self.open = result['open']
-        self.high = result['high']
-        self.low = result['low']
-        self.close = result['close']
-        self.tick_volume = result['tick_volume']
+        self.time = result["time"]
+        self.open = result["open"]
+        self.high = result["high"]
+        self.low = result["low"]
+        self.close = result["close"]
+        self.tick_volume = result["tick_volume"]

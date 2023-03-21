@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "~=1.22.3"
+MetaTrader5 = "~=5.0.36"
+abstractEasyT = "~=0.2.2"
+supportLibEasyT = "~=0.1.0"
+
+[dev-packages]
+pdtj = "*"
+pytest = "~=7.0.1"
+coverage = "~=6.3.2"
+pytest-cov = "~=3.0.0"
+black = "*"
+pre-commit = "*"
+commitizen = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+format_black = "black ."

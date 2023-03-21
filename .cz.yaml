@@ -1,0 +1,8 @@
+---
+commitizen:
+  name: cz_conventional_commits
+  tag_format: v$major.$minor.$patch$prerelease
+  version: "0.1.11"
+  version_files:
+  - pdtj/__version__.py
+  - setup.py

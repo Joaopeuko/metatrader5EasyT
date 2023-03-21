@@ -8,13 +8,11 @@ from metatrader5EasyT.timeframe import TimeFrame
 
 class TestRates:
     def test_rates_created_but_not_updated(self):
-        symbol = 'EURUSD'
+        symbol = "EURUSD"
         count = 20
         timeframe = TimeFrame()
 
-        rates = Rates(symbol=symbol,
-                      timeframe=timeframe.ONE_MINUTE,
-                      count=count)
+        rates = Rates(symbol=symbol, timeframe=timeframe.ONE_MINUTE, count=count)
 
         assert rates.time is None
         assert rates.open is None
@@ -23,20 +21,24 @@ class TestRates:
         assert rates.close is None
         assert rates.tick_volume is None
 
-    @patch.object(MetaTrader5, 'copy_rates_from_pos', return_value={'time': range(20),
-                                                                    'open': range(20),
-                                                                    'high': range(20),
-                                                                    'low': range(20),
-                                                                    'close': range(20),
-                                                                    'tick_volume': range(20)})
+    @patch.object(
+        MetaTrader5,
+        "copy_rates_from_pos",
+        return_value={
+            "time": range(20),
+            "open": range(20),
+            "high": range(20),
+            "low": range(20),
+            "close": range(20),
+            "tick_volume": range(20),
+        },
+    )
     def test_length(self, mock):
-        symbol = 'EURUSD'
+        symbol = "EURUSD"
         count = 20
         timeframe = TimeFrame()
 
-        rates = Rates(symbol=symbol,
-                      timeframe=timeframe.ONE_MINUTE,
-                      count=count)
+        rates = Rates(symbol=symbol, timeframe=timeframe.ONE_MINUTE, count=count)
 
         rates.update_rates()
 

@@ -9,16 +9,16 @@ class Tick(tick.Tick):
     """
     Tick class is the responsible to retrieve every tick information.
     """
-    def __init__(self,
-                 symbol: str):
+
+    def __init__(self, symbol: str):
         """
         Args:
             symbol:
                 It is the symbol you want information about. You can have information about time, bid, ask, last, volume.
         """
 
-        self._log = log_manager.LogManager('metatrader5')
-        self._log.logger.info('Logger Initialized in Tick')
+        self._log = log_manager.LogManager("metatrader5")
+        self._log.logger.info("Logger Initialized in Tick")
 
         self._symbol = symbol.upper()
 
@@ -77,7 +77,7 @@ class Tick(tick.Tick):
             You can ask for this information: time, bid, ask, last, volume.
 
         """
-        self._log.logger.info('Tick updated')
+        self._log.logger.info("Tick updated")
         result = Mt5.symbol_info_tick(self._symbol)
 
         self.time = datetime.fromtimestamp(result.time)

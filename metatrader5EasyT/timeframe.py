@@ -11,9 +11,10 @@ class TimeFrame(timeframe.TimeFrame):
     Examples:
         You can find an example of the TimeFrame usage in update_rates() function in Rates documentation
     """
+
     def __init__(self):
-        self._log = log_manager.LogManager('metatrader5')
-        self._log.logger.info('Logger Initialized in TimeFrame')
+        self._log = log_manager.LogManager("metatrader5")
+        self._log.logger.info("Logger Initialized in TimeFrame")
 
         self.ONE_MINUTE = Mt5.TIMEFRAME_M1  # 1 minute
         self.TWO_MINUTES = Mt5.TIMEFRAME_M2  # 2 minutes
