@@ -1,7 +1,7 @@
-numpy
-pytest
-coverage
-pytest-cov
-MetaTrader5
-abstractEasyT
-supportLibEasyT
+numpy==0.0
+pytest==0.0
+coverage==0.0
+pytest-cov==0.0
+MetaTrader5==0.0
+abstractEasyT==0.0
+supportLibEasyT==0.0
