@@ -11,7 +11,7 @@ supportLibEasyT = "~=0.1.0"
 
 [dev-packages]
 pdtj = "*"
-pytest = "~=7.0.1"
+pytest = "~=8.3.3"
 coverage = "~=7.6.1"
 pytest-cov = "~=3.0.0"
 black = "*"
